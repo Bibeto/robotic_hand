@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>   
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+    <arg name="paused" value="true"/>
+  </include>
+
+
+  <group ns="/robotic_hand" >
+    
+    <param name="robot_description" 
+        command="$(find xacro)/xacro '$(find robotic_hand)/urdf/robotic_hand.xacro'"/>
+
+    <arg name="pi" value="3.14159265" />
+
+    <arg name="x_pos" default="0.0" />
+    <arg name="y_pos" default="0.0" />
+    <arg name="z_pos" default="0.0" /> 
+
+    <arg name="roll" default="0.0"/>
+    <arg name="pitch" default="0.0"/>
+    <arg name="yaw" default="0.0"/> 
+
+    <node
+      name="tf_footprint_base"
+      pkg="tf"
+      type="static_transform_publisher"
+      args="0 0 0 0 0 0 base_link base_footprint 40" />
+    
+ 
+    <!--  Robot spawn -->
+      <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" 
+        args="-param robot_description -urdf -model robotic_hand 
+          -z $(arg z_pos) -y $(arg y_pos) -x $(arg x_pos) 
+          -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)
+          -J base_link__link_01   0.0
+          -J link_01__link_02     0.0
+          -J link_02__link_03     0.0
+          -J link_03__link_04     0.0 
+          
+          " 
+        output="screen" />
+          
+          
+
+    <node
+      name="fake_joint_calibration"
+      pkg="rostopic"
+      type="rostopic"
+      args="pub /calibrated std_msgs/Bool true" />
+
+  </group>
+
+</launch> 

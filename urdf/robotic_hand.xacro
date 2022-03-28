@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="robotic_hand" xmlns:xacro="http://ww.ros.org/wiki/xacro" >
+
+  <xacro:property name="pi" value="3.1415926" />
+  <xacro:property name="max_speed" value="0.5" />
+  <!-- Used for fixing robot to Gazebo 'base_link' -->
+  <link name="world"/>
+  
+  <link name="base_link">
+    <inertial>
+      <origin
+        xyz="0.0308778577972146 7.23574440163174E-09 0.0929952149471287"
+        rpy="0 0 0" />
+      <mass
+        value="19.8390707538009" />
+      <inertia
+        ixx="0.335668354254509"
+        ixy="0"
+        ixz="-0.0394085773407689"
+        iyy="0.417595123261129"
+        iyz="0"
+        izz="0.489142579952611" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robotic_hand/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robotic_hand/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="fixed" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+
+  <link
+    name="link_01">
+    <inertial>
+      <origin
+        xyz="-1.56260412873615E-10 6.9589674135401E-17 0.213075746734315"
+        rpy="0 0 0" />
+      <mass
+        value="14.514675782209" />
+      <inertia
+        ixx="0.281386811179828"
+        ixy="0"
+        ixz="0"
+        iyy="0.308061815657121"
+        iyz="0"
+        izz="0.109489938167645" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robotic_hand/meshes/link_01.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robotic_hand/meshes/link_01.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="base_link__link_01" type="revolute">
+    <origin
+      xyz="0 0 0.16"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="link_01" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="10000000"
+      velocity="${max_speed}" />
+  </joint>
+
+  <transmission name="trans_base_link__link_01">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="base_link__link_01">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor_base_link__link_01">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  
+  <link name="link_02">
+    <inertial>
+      <origin
+        xyz="0.172960283257488 9.2323982903153E-09 -0.00999999671491019"
+        rpy="0 0 0" />
+      <mass
+        value="13.6291679155117" />
+      <inertia
+        ixx="0.116753847077147"
+        ixy="0"
+        ixz="0"
+        iyy="0.573064357786754"
+        iyz="0"
+        izz="0.508986803441728" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robotic_hand/meshes/link_02.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robotic_hand/meshes/link_02.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="link_01__link_02" type="revolute">
+    <origin
+      xyz="0 0 0.336"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="link_01" />
+    <child
+      link="link_02" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.1416"
+      upper="0.57"
+      effort="1000000"
+      velocity="${max_speed}" />
+  </joint>
+
+  <transmission name="trans_link_01__link_02">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="link_01__link_02">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor_link_01__link_02">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+  <link name="link_03">
+    <inertial>
+      <origin
+        xyz="0.136864844611323 -0.116084428922871 -0.0100000007019711"
+        rpy="0 0 0" />
+      <mass
+        value="12.0205287274032" />
+      <inertia
+        ixx="0.0721120340472313"
+        ixy="0.0378363713177936"
+        ixz="0"
+        iyy="0.338766579653999"
+        iyz="0"
+        izz="0.365721756676767" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robotic_hand/meshes/link_03.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robotic_hand/meshes/link_03.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="link_02__link_03" type="revolute">
+    <origin
+      xyz="0.5 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="link_02" />
+    <child
+      link="link_03" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-0.55"
+      upper="1.50"
+      effort="10000000"
+      velocity="${max_speed}" />
+  </joint>
+
+  <transmission name="trans_link_02__link_03">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="link_02__link_03">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor_link_02__link_03">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  
+  <link name="link_04">
+    <inertial>
+      <origin
+        xyz="0.0242575575997317 -0.00255913414627673 -0.0100000041827126"
+        rpy="0 0 0" />
+      <mass
+        value="1.18860538743332" />
+      <inertia
+        ixx="0.00217445241621486"
+        ixy="-0.000253211295896707"
+        ixz="0"
+        iyy="0.00634988308639446"
+        iyz="0"
+        izz="0.00688569387033409" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robotic_hand/meshes/link_04.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robotic_hand/meshes/link_04.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="link_03__link_04" type="revolute">
+    <origin
+      xyz="0.42771 -0.13865 0"
+      rpy="0 0 1.5708" />
+    <parent
+      link="link_03" />
+    <child
+      link="link_04" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-0.50"
+      upper="1.57"
+      effort="99999"
+      velocity="${max_speed}" />
+  </joint>
+
+  <transmission name="trans_link_03__link_04">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="link_03__link_04">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor_link_03__link_04">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/robotic_hand</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+
+</robot>

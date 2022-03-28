@@ -1,0 +1,4 @@
+.vscode
+build
+export.log
+__pycache__
