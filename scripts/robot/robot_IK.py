@@ -40,6 +40,9 @@ class Robot_IK :
 
         return ( (jacobian_inversed * delta_x) + self.__q0 ) 
 
+    def move(): 
+        pass
+
 
     def set_q0(self, new_angular_position): 
         self.__q0 = new_angular_position

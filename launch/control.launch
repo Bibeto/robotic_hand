@@ -9,6 +9,9 @@
             joint4_position_controller joint_state_controller"/>
 
   <!-- convert joint states to TF transforms for rviz, etc -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find robotic_hand)/urdf/robotic_hand.xacro'"/>
+
+
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
     respawn="false" output="screen">
     <remap from="/joint_states" to="/robotic_hand/joint_states" />
