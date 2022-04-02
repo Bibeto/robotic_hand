@@ -51,5 +51,7 @@ for robotic_hand robot</p>
 
   <export>
     <architecture_independent />
+    <gazebo_ros gazebo_model_path="${prefix}/models"/>
+    <gazebo_ros gazebo_media_path="${prefix}/models"/>
   </export>
 </package>

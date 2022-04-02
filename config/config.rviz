@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /RobotModel1
       Splitter Ratio: 0.5
     Tree Height: 549
   - Class: rviz/Selection
@@ -96,7 +97,47 @@ Visualization Manager:
       TF Prefix: ""
       Update Interval: 0
       Value: true
-      Visual Enabled: true
+      Visual Enabled: false
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        base_footprint:
+          Value: true
+        base_link:
+          Value: true
+        end_effector:
+          Value: true
+        link_01:
+          Value: true
+        link_02:
+          Value: true
+        link_03:
+          Value: true
+        link_04:
+          Value: true
+        world:
+          Value: true
+      Marker Alpha: 1
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        world:
+          base_link:
+            base_footprint:
+              {}
+            link_01:
+              link_02:
+                link_03:
+                  link_04:
+                    end_effector:
+                      {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -125,7 +166,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 10
+      Distance: 4.837461948394775
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -133,17 +174,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: 0.6883036494255066
+        Y: -2.1684083938598633
+        Z: -0.32418668270111084
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.785398006439209
+      Pitch: 0.24039845168590546
       Target Frame: <Fixed Frame>
-      Yaw: 0.785398006439209
+      Yaw: 1.6353974342346191
     Saved: ~
 Window Geometry:
   Displays:
@@ -162,4 +203,4 @@ Window Geometry:
     collapsed: false
   Width: 1267
   X: 60
-  Y: 23
+  Y: 0

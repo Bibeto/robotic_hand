@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<launch>
-  <node name="summon_end_effector_frame" pkg="tf" type="static_transform_publisher" 
-    args="0.180 0 0 0 0 0 link_04 end_effector 0.01"
-  />
-</launch>

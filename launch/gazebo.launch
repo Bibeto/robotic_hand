@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>   
-  
+
+
+
+  <arg name="custom_world" value="empty" />
+
+
+
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find robotic_hand)/models)"/>
+
+  <arg name="extra_gazebo_args" default="--verbose"/>
+
   <include file="$(find gazebo_ros)/launch/empty_world.launch" >
     <arg name="paused" value="true"/>
+    <arg name="world_name" value="$(find robotic_hand)/worlds/$(arg custom_world).world"/>
+    <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args)"/>
   </include>
 
 
@@ -50,5 +63,28 @@
       args="pub /calibrated std_msgs/Bool true" />
 
   </group>
+
+  <rosparam file="$(find robotic_hand)/config/joints.yaml" command="load"/>
+
+  
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/robotic_hand" args="joint1_position_controller joint2_position_controller joint3_position_controller 
+            joint4_position_controller joint_state_controller"/>
+
+  
+  <param name="robot_description" command="$(find xacro)/xacro '$(find robotic_hand)/urdf/robotic_hand.xacro'"/>
+   
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+    respawn="false" output="screen">
+    <remap from="/joint_states" to="/robotic_hand/joint_states" />
+  </node>
+
+   <!-- Just adding a TF for the end effector  -->
+  <node name="summon_end_effector_frame" pkg="tf" type="static_transform_publisher" 
+    args="0.180 0 0 0 0 0 link_04 end_effector 0.01"
+  />
 
 </launch> 

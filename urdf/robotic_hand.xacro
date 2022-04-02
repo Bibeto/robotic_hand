@@ -6,6 +6,8 @@
 
   <xacro:property name="pi" value="3.1415926" />
   <xacro:property name="max_speed" value="0.5" />
+  <xacro:property name="max_effort" value="10000000" />
+  
   <!-- Used for fixing robot to Gazebo 'base_link' -->
   <link name="world"/>
   
@@ -108,7 +110,7 @@
     <limit
       lower="-3.1416"
       upper="3.1416"
-      effort="10000000"
+      effort="${max_effort}"
       velocity="${max_speed}" />
   </joint>
 
@@ -176,7 +178,7 @@
     <limit
       lower="-3.1416"
       upper="0.57"
-      effort="1000000"
+      effort="${max_effort}"
       velocity="${max_speed}" />
   </joint>
 
@@ -244,7 +246,7 @@
     <limit
       lower="-0.55"
       upper="1.50"
-      effort="10000000"
+      effort="${max_effort}"
       velocity="${max_speed}" />
   </joint>
 
@@ -312,7 +314,7 @@
     <limit
       lower="-0.50"
       upper="1.57"
-      effort="99999"
+      effort="${max_effort}"
       velocity="${max_speed}" />
   </joint>
 

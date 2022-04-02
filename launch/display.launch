@@ -4,7 +4,7 @@
     name="model" />
   <param
     name="robot_description"
-    textfile="$(find robotic_hand)/urdf/robotic_hand.urdf" />
+    command="$(find xacro)/xacro '$(find robotic_hand)/urdf/robotic_hand.xacro'" />
   <node
     name="rviz"
     pkg="rviz"

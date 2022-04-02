@@ -20,7 +20,7 @@ from sensor_msgs.msg import JointState
 
 
 ERROR_TOLERANCE = 50 
-NUMBER_OF_ITERATIONS_LIMIT = 13
+NUMBER_OF_ITERATIONS_LIMIT = 4
 
 
 global joint_states
@@ -89,7 +89,7 @@ def move(next_position):
 
 
 def main(): 
-    while not rospy.is_shutdown():   
+    for i in range(-500, 600, 100):   
         # Get actual position right : the same as the simulation
         global actual_position
         
@@ -100,12 +100,13 @@ def main():
         my_robot.set_q0(actual_angles)
         print("Actual position x : ", actual_position[0], " y : ", actual_position[1], " z : ", actual_position[2], "\n\n")
 
-        x_given = float(input("Give x: "))
-        y_given = float(input("Give y: "))
-        z_given = float(input("Give z: "))
+        x_given = 850.0
+        y_given = float(i)
+        z_given = 250.0
 
         next_position = sympy.Matrix([x_given, y_given, z_given])
         actual_position = my_robot.get_X0()
+
         
         # intial value for the quadratic error to enter the loop the first time 
         quadratic_error = 51

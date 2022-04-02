@@ -8,5 +8,4 @@ def calculate_quadratic_error(actual_position, desired_position):
             +(actual_position[1]-desired_position[1])**2 
             +(actual_position[2]-desired_position[2])**2
      )
-
     return quadratic_error
